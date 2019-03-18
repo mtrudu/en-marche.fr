@@ -168,6 +168,13 @@ class Committee extends BaseGroup implements SynchronizedEntity, ReferentTaggabl
     private $photoUploaded = false;
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $mailchimpId;
+
+    /**
      * A cached list of the hosts (for admin).
      */
     public $hosts = [];
@@ -493,5 +500,15 @@ class Committee extends BaseGroup implements SynchronizedEntity, ReferentTaggabl
         return array_map(function (ReferentTag $referentTag) {
             return $referentTag->getCode();
         }, $this->referentTags->toArray());
+    }
+
+    public function getMailchimpId(): ?int
+    {
+        return $this->mailchimpId;
+    }
+
+    public function setMailchimpId(int $mailchimpId): void
+    {
+        $this->mailchimpId = $mailchimpId;
     }
 }

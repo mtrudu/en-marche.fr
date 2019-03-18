@@ -158,7 +158,8 @@
         <prototype namespace="AppBundle\Exporter\" resource="../../../src/Exporter/" />
 
         <!-- Form -->
-        <service id="AppBundle\Form\ReferentTagChoiceType"/>
+        <service id="AppBundle\Form\MyReferentTagChoiceType"/>
+        <service id="AppBundle\Form\MyCommitteeChoiceType"/>
         <service id="AppBundle\Form\CitizenProjectCommandType"/>
         <service id="AppBundle\Form\EventListener\AmpSynchronisedListener"/>
         <service id="AppBundle\Form\EventRegistrationType"/>
@@ -505,6 +506,14 @@
             </call>
         </service>
 
+        <service id="AppBundle\AdherentMessage\Handler\CreateCommitteeStaticSegmentCommandHandler">
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="AppBundle\Mailchimp\Synchronisation\Handler\UpdateCommitteeStaticSegmentHandler">
+            <tag name="messenger.message_handler" />
+        </service>
+
         <service id="AppBundle\AdherentMessage\Handler\AdherentMessageChangeCommandHandler">
             <tag name="messenger.message_handler" />
         </service>
@@ -534,6 +543,8 @@
             <argument key="$replyEmailAddress" type="string">%campaign_sender_email%</argument>
             <argument key="$fromName" type="string">%campaign_sender_name%</argument>
         </service>
+
+        <service id="AppBundle\AdherentMessage\Listener\CreateCommitteeStaticSegmentListener" />
 
         <service id="AppBundle\AdherentMessage\Listener\AdherentMessageChangeSubscriber">
             <tag name="doctrine.event_subscriber"/>
